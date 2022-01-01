@@ -1,0 +1,1 @@
+Folder for Middleware functions of Redux
