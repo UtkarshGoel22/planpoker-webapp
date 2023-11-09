@@ -1,2 +1,2 @@
-# mp-Poker-Planer-FE
-Poker Planer minor project Front-end repo.
+# mp-PP-FE
+Minor project Front-end repo.
