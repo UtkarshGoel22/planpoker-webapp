@@ -1,2 +1,1 @@
-# mp-PP-FE
-Minor project Front-end repo.
+Plan Poker Frontend
