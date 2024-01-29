@@ -1,1 +1,0 @@
-## Plan Poker Frontend
