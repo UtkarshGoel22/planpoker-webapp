@@ -1,7 +1,17 @@
-import "@src/App.css"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
-const App = () => {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>
+import "@src/App.css"
+import { ROUTES } from "@constants/routes.const"
+import Signup from "@pages/Signup/index"
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={ROUTES.signup} element={<Signup />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App
