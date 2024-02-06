@@ -8,4 +8,8 @@ export const API = {
   headers: {
     applicationJson: "application/json",
   },
+  methods: {
+    get: "GET",
+    post: "POST",
+  },
 }

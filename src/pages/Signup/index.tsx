@@ -43,7 +43,7 @@ function Signup() {
   }
 
   return (
-    <div>
+    <>
       {auth.registration?.success ? (
         <CustomModal
           open={true}
@@ -80,7 +80,7 @@ function Signup() {
           />
         </Box>
       </Container>
-    </div>
+    </>
   )
 }
 
