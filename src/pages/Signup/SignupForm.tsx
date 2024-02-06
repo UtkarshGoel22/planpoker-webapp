@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link as RouterLink } from "react-router-dom"
 
 import { Visibility, VisibilityOff } from "@mui/icons-material"
 import { LoadingButton } from "@mui/lab"
@@ -14,6 +15,7 @@ import {
 import { Form, Formik } from "formik"
 
 import { FIELDS } from "@constants/fields.const"
+import { ROUTES } from "@constants/routes.const"
 import { TEXT } from "@constants/text.const"
 import { SIGNUP_SCHEMA } from "@pages/Signup/constants"
 import { SignupFormProps } from "@pages/Signup/types"
@@ -210,7 +212,13 @@ function SignupForm({
                 </LoadingButton>
                 <Grid container justifyContent="center">
                   <Grid item>
-                    <Link variant="body2">{TEXT.alreadyHaveAnAccout}</Link>
+                    <Link
+                      component={RouterLink}
+                      to={ROUTES.signin}
+                      variant="body2"
+                    >
+                      {TEXT.alreadyHaveAnAccout}
+                    </Link>
                   </Grid>
                 </Grid>
               </Box>
