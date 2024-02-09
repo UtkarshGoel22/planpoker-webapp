@@ -4,6 +4,7 @@ export const API = {
     userSignup: "/user/signup",
     userLogin: "/user/login",
     userLogout: "/user/logout",
+    userVerify: "/user/verify",
   },
   headers: {
     applicationJson: "application/json",
