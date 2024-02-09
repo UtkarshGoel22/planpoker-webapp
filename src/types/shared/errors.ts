@@ -6,4 +6,8 @@ export interface AuthErrors {
   password?: string
   confirmPassword?: string
   api?: string
+  token?: string
+  verify?: string
+  reVerify?: string
+  alreadyVerified?: string
 }
