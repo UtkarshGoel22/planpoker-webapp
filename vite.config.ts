@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      "@components": "/src/components",
       "@constants": "/src/constants",
       "@context": "/src/context",
       "@helpers": "/src/helpers",
@@ -14,7 +15,7 @@ export default defineConfig({
       "@services": "/src/services",
       "@src": "/src",
       "@state": "/src/state",
-      "@types": "/src/types",
+      "@utils": "/src/utils",
     },
   },
   server: {

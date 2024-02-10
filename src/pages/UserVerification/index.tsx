@@ -12,15 +12,15 @@ import Container from "@mui/material/Container"
 import CssBaseline from "@mui/material/CssBaseline"
 import Typography from "@mui/material/Typography"
 
+import CustomModal from "@components/CustomModal"
 import { ROUTES } from "@constants/routes.const"
 import { TEXT } from "@constants/text.const"
 import { QUERY_PARAMS } from "@constants/query.const"
 import useQuery from "@hooks/useQuery.hook"
 import { UserVerificationFormValues } from "@pages/UserVerification/types"
 import UserVerificationForm from "@pages/UserVerification/userVerificationForm"
-import CustomModal from "@src/components/CustomModal"
-import { authActions } from "@src/state/redux/authSlice"
-import { useAppDispatch, useAppSelector } from "@src/state/redux/hooks"
+import { authActions } from "@state/redux/authSlice"
+import { useAppDispatch, useAppSelector } from "@state/redux/hooks"
 
 function UserVerification() {
   const dispatch = useAppDispatch()

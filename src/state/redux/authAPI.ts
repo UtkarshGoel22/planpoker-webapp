@@ -2,7 +2,7 @@ import { API } from "@constants/api.const"
 import { SigninAPIRequestData } from "@pages/Signin/types"
 import { SignupAPIRequestData } from "@pages/Signup/types"
 import { ReSendVerificationLinkAPIRequestData } from "@pages/UserVerification/types"
-import { makeRequest } from "@src/utils/api.util"
+import { makeRequest } from "@utils/api.util"
 
 export async function reSendVerificationLink(
   requestData: ReSendVerificationLinkAPIRequestData,

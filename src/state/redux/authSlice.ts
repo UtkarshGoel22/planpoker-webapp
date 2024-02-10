@@ -4,7 +4,6 @@ import { SignupAPIRequestData } from "@pages/Signup/types"
 import { ReSendVerificationLinkAPIRequestData } from "@pages/UserVerification/types"
 import { AuthErrors } from "@src/types/shared/errors"
 import { User } from "@src/types/shared/user"
-import { getItemInLocalStorage } from "@src/utils/localStorage.utils"
 import {
   reSendVerificationLink,
   signinUser,
@@ -12,6 +11,7 @@ import {
   verifyEmail,
 } from "@state/redux/authAPI"
 import { createAppSlice } from "@state/redux/createAppSlice"
+import { getItemInLocalStorage } from "@utils/localStorage.utils"
 
 export interface AuthSliceState {
   errors: AuthErrors | null

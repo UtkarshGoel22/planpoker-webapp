@@ -12,8 +12,8 @@ import { ROUTES } from "@constants/routes.const"
 import { TEXT } from "@constants/text.const"
 import SigninForm from "@pages/Signin/SigninForm"
 import { SigninFormValues } from "@pages/Signin/types"
-import { authActions } from "@src/state/redux/authSlice"
-import { useAppDispatch, useAppSelector } from "@src/state/redux/hooks"
+import { authActions } from "@state/redux/authSlice"
+import { useAppDispatch, useAppSelector } from "@state/redux/hooks"
 
 function Signin() {
   const dispatch = useAppDispatch()

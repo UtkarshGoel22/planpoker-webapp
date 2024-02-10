@@ -8,13 +8,13 @@ import Container from "@mui/material/Container"
 import CssBaseline from "@mui/material/CssBaseline"
 import Typography from "@mui/material/Typography"
 
+import CustomModal from "@components/CustomModal"
 import { ROUTES } from "@constants/routes.const"
 import { TEXT } from "@constants/text.const"
 import SignupForm from "@pages/Signup/SignupForm"
 import { SignupFormValues } from "@pages/Signup/types"
-import CustomModal from "@src/components/CustomModal"
-import { authActions } from "@src/state/redux/authSlice"
-import { useAppDispatch, useAppSelector } from "@src/state/redux/hooks"
+import { authActions } from "@state/redux/authSlice"
+import { useAppDispatch, useAppSelector } from "@state/redux/hooks"
 
 function Signup() {
   const dispatch = useAppDispatch()
