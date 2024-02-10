@@ -1,18 +1,16 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-import { EmailOutlined } from "@mui/icons-material"
-import {
-  Alert,
-  Avatar,
-  Backdrop,
-  Box,
-  CircularProgress,
-  Container,
-  CssBaseline,
-  Typography,
-  useTheme,
-} from "@mui/material"
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined"
+import { useTheme } from "@mui/material/styles"
+import Alert from "@mui/material/Alert"
+import Avatar from "@mui/material/Avatar"
+import Backdrop from "@mui/material/Backdrop"
+import Box from "@mui/material/Box"
+import CircularProgress from "@mui/material/CircularProgress"
+import Container from "@mui/material/Container"
+import CssBaseline from "@mui/material/CssBaseline"
+import Typography from "@mui/material/Typography"
 
 import { ROUTES } from "@constants/routes.const"
 import { TEXT } from "@constants/text.const"
@@ -92,7 +90,7 @@ function UserVerification() {
               }}
             >
               <Avatar sx={{ m: theme.spacing(1), bgcolor: "secondary.main" }}>
-                <EmailOutlined />
+                <EmailOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5" textAlign="center">
                 {TEXT.sendEmailVerificationLink}

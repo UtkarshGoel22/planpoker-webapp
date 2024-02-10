@@ -1,22 +1,21 @@
 import { useState } from "react"
 import { Link as RouterLink } from "react-router-dom"
 
-import { Visibility, VisibilityOff } from "@mui/icons-material"
-import { LoadingButton } from "@mui/lab"
-import {
-  Box,
-  Grid,
-  IconButton,
-  InputAdornment,
-  Link,
-  TextField,
-  useTheme,
-} from "@mui/material"
+import VisibilityIcon from "@mui/icons-material/Visibility"
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
+import LoadingButton from "@mui/lab/LoadingButton"
+import { useTheme } from "@mui/material/styles"
+import Box from "@mui/material/Box"
+import Grid from "@mui/material/Grid"
+import IconButton from "@mui/material/IconButton"
+import InputAdornment from "@mui/material/InputAdornment"
+import Link from "@mui/material/Link"
+import TextField from "@mui/material/TextField"
 import { Form, Formik } from "formik"
 
 import { FIELDS } from "@constants/fields.const"
-import { TEXT } from "@constants/text.const"
 import { ROUTES } from "@constants/routes.const"
+import { TEXT } from "@constants/text.const"
 import { SIGNIN_SCHEMA } from "@pages/Signin/constants"
 import { SigninFormProps } from "@pages/Signin/types"
 
@@ -105,9 +104,9 @@ function SigninForm({
                               onClick={() => setShowPassword(!showPassword)}
                             >
                               {showPassword ? (
-                                <Visibility />
+                                <VisibilityIcon />
                               ) : (
-                                <VisibilityOff />
+                                <VisibilityOffIcon />
                               )}
                             </IconButton>
                           </InputAdornment>

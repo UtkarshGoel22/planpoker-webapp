@@ -2,7 +2,8 @@ import React from "react"
 import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
 
-import { CssBaseline, ThemeProvider } from "@mui/material"
+import CssBaseline from "@mui/material/CssBaseline"
+import { ThemeProvider } from "@mui/material/styles"
 
 import App from "@src/App"
 import theme from "@src/theme"
