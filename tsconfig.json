@@ -17,6 +17,7 @@
     "types": ["vitest/globals"],
     "baseUrl": ".",
     "paths": {
+      "@components/*": ["src/components/*"],
       "@constants/*": ["src/constants/*"],
       "@context/*": ["src/context/*"],
       "@helpers/*": ["src/helpers/*"],
@@ -25,7 +26,7 @@
       "@services/*": ["src/services/*"],
       "@src/*": ["src/*"],
       "@state/*": ["src/state/*"],
-      "@types/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"],
     },
   },
   "include": ["src"],

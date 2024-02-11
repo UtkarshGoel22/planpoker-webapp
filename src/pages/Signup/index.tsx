@@ -1,22 +1,20 @@
 import { useNavigate } from "react-router-dom"
 
-import { LockOutlined } from "@mui/icons-material"
-import {
-  Avatar,
-  Box,
-  Container,
-  CssBaseline,
-  Typography,
-  useTheme,
-} from "@mui/material"
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
+import { useTheme } from "@mui/material/styles"
+import Avatar from "@mui/material/Avatar"
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import CssBaseline from "@mui/material/CssBaseline"
+import Typography from "@mui/material/Typography"
 
+import CustomModal from "@components/CustomModal"
 import { ROUTES } from "@constants/routes.const"
 import { TEXT } from "@constants/text.const"
 import SignupForm from "@pages/Signup/SignupForm"
 import { SignupFormValues } from "@pages/Signup/types"
-import CustomModal from "@src/components/CustomModal"
-import { authActions } from "@src/state/redux/authSlice"
-import { useAppDispatch, useAppSelector } from "@src/state/redux/hooks"
+import { authActions } from "@state/redux/authSlice"
+import { useAppDispatch, useAppSelector } from "@state/redux/hooks"
 
 function Signup() {
   const dispatch = useAppDispatch()
@@ -67,7 +65,7 @@ function Signup() {
           }}
         >
           <Avatar sx={{ m: theme.spacing(1), bgcolor: "secondary.main" }}>
-            <LockOutlined />
+            <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             {TEXT.signup}

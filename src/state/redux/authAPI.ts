@@ -1,8 +1,10 @@
 import { API } from "@constants/api.const"
+import { AUTH } from "@constants/webStorage.const"
 import { SigninAPIRequestData } from "@pages/Signin/types"
 import { SignupAPIRequestData } from "@pages/Signup/types"
 import { ReSendVerificationLinkAPIRequestData } from "@pages/UserVerification/types"
-import { makeRequest } from "@src/utils/api.util"
+import { makeRequest } from "@utils/api.util"
+import { setItemInLocalStorage } from "@utils/localStorage.utils"
 
 export async function reSendVerificationLink(
   requestData: ReSendVerificationLinkAPIRequestData,
@@ -33,6 +35,9 @@ export async function signinUser(
     },
     rejectWithValue,
   )
+  if (response.data.token) {
+    setItemInLocalStorage(AUTH, JSON.stringify(response.data))
+  }
   return response.data
 }
 
