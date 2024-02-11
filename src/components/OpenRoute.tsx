@@ -1,20 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Route, Redirect } from 'react-router-dom';
-import { ROUTE } from '../constants/constant';
-import { RootState } from '../redux/store';
+import { Navigate } from "react-router-dom"
 
-const OpenRoute = ({ component: Component, ...rest }: any) => {
-  const { token } = useSelector((store: RootState) => store.auth);
+import { ROUTES } from "@constants/routes.const"
+import { useAppSelector } from "@state/redux/hooks"
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        token ? <Redirect to={ROUTE.dashboard} /> : <Component {...props} />
-      }
-    />
-  );
-};
+function OpenRoute({ component: Component }: any) {
+  const { token } = useAppSelector(state => state.auth)
+  if (token) {
+    return <Navigate to={ROUTES.dashboard} replace />
+  } else {
+    return Component
+  }
+}
 
-export default OpenRoute;
+export default OpenRoute

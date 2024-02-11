@@ -1,0 +1,20 @@
+export const TEXT = {
+  alreadyHaveAnAccout: "Already have an account? Sign in",
+  createGroup: "Create Group",
+  createPokerboard: "Create Pokerboard",
+  emailVerificationLinkValidity:
+    "Email verification link will be valid till next 6 hours",
+  doNotHaveAnAccount: "Do not have an account? Sign up",
+  dashboard: "Dashboard",
+  groups: "Groups",
+  logout: "Logout",
+  pageNotFound: "404 Page Not Found",
+  planPoker: "Plan Poker",
+  profile: "Profile",
+  reSendEmail: "Re-Send Email",
+  savedPokerboards: "Saved Pokerboards",
+  sendEmailVerificationLink: "Send Email Verification Link",
+  signin: "Sign In",
+  signup: "Sign Up",
+  tickets: "Tickets",
+}

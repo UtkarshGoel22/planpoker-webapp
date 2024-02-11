@@ -1,20 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Route, Redirect } from 'react-router-dom';
-import { ROUTE } from '../constants/route';
-import { RootState } from '../redux/store';
+import { Navigate } from "react-router-dom"
 
-const PrivateRoute = ({ component: Component, ...rest }: any) => {
-  const { token } = useSelector((store: RootState) => store.auth);
+import { ROUTES } from "@constants/routes.const"
+import { useAppSelector } from "@state/redux/hooks"
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        token ? <Component {...props} /> : <Redirect to={ROUTE.signin} />
-      }
-    />
-  );
-};
+const PrivateRoute = ({ component: Component }: any) => {
+  const { token } = useAppSelector(state => state.auth)
+  if (token) {
+    return Component
+  } else {
+    return <Navigate to={ROUTES.signin} replace />
+  }
+}
 
-export default PrivateRoute;
+export default PrivateRoute

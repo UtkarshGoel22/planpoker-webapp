@@ -1,143 +1,165 @@
-import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import clsx from 'clsx';
-import { useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import SaveIcon from '@material-ui/icons/Save';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import GroupIcon from '@material-ui/icons/Group';
-import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import PersonIcon from '@material-ui/icons/Person';
-import { navStyles, useStyles } from '../styles/style';
-import { CONSTANT, ROUTE } from '../constants/constant';
-import { logoutUser } from '../redux/actions/authActions';
-import { RootState } from '../redux/store';
-import { Button } from '@material-ui/core';
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+
+import AddBoxIcon from "@mui/icons-material/AddBox"
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
+import ChevronRightIcon from "@mui/icons-material/ChevronRight"
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber"
+import CssBaseline from "@mui/material/CssBaseline"
+import GridViewIcon from "@mui/icons-material/GridView"
+import GroupAddIcon from "@mui/icons-material/GroupAdd"
+import GroupIcon from "@mui/icons-material/Group"
+import LogoutIcon from "@mui/icons-material/Logout"
+import PersonIcon from "@mui/icons-material/Person"
+import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles"
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
+import Divider from "@mui/material/Divider"
+import MuiDrawer from "@mui/material/Drawer"
+import IconButton from "@mui/material/IconButton"
+import List from "@mui/material/List"
+import ListItem from "@mui/material/ListItem"
+import ListItemIcon from "@mui/material/ListItemIcon"
+import ListItemText from "@mui/material/ListItemText"
+import MenuIcon from "@mui/icons-material/Menu"
+import Toolbar from "@mui/material/Toolbar"
+import Typography from "@mui/material/Typography"
+
+import { useAppDispatch, useAppSelector } from "@state/redux/hooks"
+import { ROUTES } from "@constants/routes.const"
+import { TEXT } from "@constants/text.const"
+import Tooltip from "@mui/material/Tooltip"
+
+const drawerWidth = 240
+
+const openedMixin = (theme: Theme): CSSObject => ({
+  backgroundColor: theme.palette.primary.main,
+  width: drawerWidth,
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: "hidden",
+})
+
+const closedMixin = (theme: Theme): CSSObject => ({
+  backgroundColor: theme.palette.primary.main,
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: "hidden",
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up("sm")]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
+})
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}))
+
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean
+}
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: prop => prop !== "open",
+})<AppBarProps>(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}))
+
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: prop => prop !== "open",
+})(({ theme, open }) => ({
+  width: drawerWidth,
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+  ...(open && {
+    ...openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
+  }),
+  ...(!open && {
+    ...closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
+  }),
+}))
 
 function Navbar() {
-  const { token } = useSelector((store: RootState) => store.auth);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const { token } = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const theme = useTheme()
+  const [open, setOpen] = useState(false)
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  function handleDrawerOpen() {
+    setOpen(true)
+  }
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
-  function redirectToHome() {
-    history.push(ROUTE.home);
+  function handleDrawerClose() {
+    setOpen(false)
   }
 
   function handleClick() {
-    dispatch(logoutUser(redirectToHome));
+    // TODO: dispatch logout action
   }
 
-  function renderButtons() {
-    if (token) {
-      return (
-        <>
-          <Button
-            component={Link}
-            to={ROUTE.dashboard}
-            className={navClasses.btn}
-          >
-            {CONSTANT.dashboard}
-          </Button>
-          <Button
-            component={Link}
-            to={ROUTE.myProfile}
-            className={navClasses.btn}
-          >
-            {CONSTANT.profile}
-          </Button>
-          <Button
-            component={Link}
-            to={ROUTE.createPokerboard}
-            className={navClasses.btn}
-          >
-            {CONSTANT.createPokerboard}
-          </Button>
-          <Button className={navClasses.btnRed} onClick={handleClick}>
-            {CONSTANT.logout}
-          </Button>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Button component={Link} to={ROUTE.signin} className={navClasses.btn}>
-            {CONSTANT.signIn}
-          </Button>
-          <Button component={Link} to={ROUTE.signup} className={navClasses.btn}>
-            {CONSTANT.signUp}
-          </Button>
-        </>
-      );
-    }
-  }
+  const drawerItemsList = [
+    {
+      text: TEXT.dashboard,
+      icon: <GridViewIcon sx={{ color: "white" }} />,
+      onClick: () => navigate(ROUTES.dashboard),
+    },
+    {
+      text: TEXT.createPokerboard,
+      icon: <AddBoxIcon sx={{ color: "white" }} />,
+      onClick: () => navigate(ROUTES.createPokerboard),
+    },
+    {
+      text: TEXT.createGroup,
+      icon: <GroupAddIcon sx={{ color: "white" }} />,
+      onClick: () => navigate(ROUTES.createGroup),
+    },
+    {
+      text: TEXT.groups,
+      icon: <GroupIcon sx={{ color: "white" }} />,
+      onClick: () => navigate(ROUTES.groups),
+    },
+    {
+      text: TEXT.tickets,
+      icon: <ConfirmationNumberIcon sx={{ color: "white" }} />,
+      onClick: () => navigate(ROUTES.tickets),
+    },
 
-  const itemsList = [
     {
-      text: CONSTANT.savedPokerboards,
-      icon: <SaveIcon className="white" />,
-      onClick: () => history.push(ROUTE.dashboard),
+      text: TEXT.profile,
+      icon: <PersonIcon sx={{ color: "white" }} />,
+      onClick: () => navigate(ROUTES.myProfile),
     },
-    {
-      text: CONSTANT.createPokerboard,
-      icon: <AddBoxIcon className="white" />,
-      onClick: () => history.push(ROUTE.createPokerboard),
-    },
-    {
-      text: CONSTANT.groups,
-      icon: <GroupIcon className="white" />,
-      onClick: () => history.push(ROUTE.groupPage),
-    },
-    {
-      text: CONSTANT.tickets,
-      icon: <ConfirmationNumberIcon className="white" />,
-      onClick: () => history.push(ROUTE.tickets),
-    },
-    {
-      text: CONSTANT.createGroup,
-      icon: <GroupAddIcon className="white" />,
-      onClick: () => history.push(ROUTE.createGroup),
-    },
-    {
-      text: CONSTANT.profile,
-      icon: <PersonIcon className="white" />,
-      onClick: () => history.push(ROUTE.myProfile),
-    },
-  ];
+  ]
 
-  const navClasses = navStyles();
   return (
-    <div>
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+      <AppBar component="nav" position="fixed" open={open}>
         <Toolbar>
           {token ? (
             <IconButton
@@ -145,64 +167,67 @@ function Navbar() {
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
-              className={clsx(classes.menuButton, {
-                [classes.hide]: open,
-              })}
+              sx={{
+                marginRight: 2,
+                ...(open && { display: "none" }),
+              }}
             >
               <MenuIcon />
             </IconButton>
           ) : (
-            ''
+            ""
           )}
-          <Typography variant="h6" className={navClasses.title}>
-            <Link to={ROUTE.home} className="link">
-              {CONSTANT.pokerPlaner}
+          <Typography
+            variant="h6"
+            sx={{ flexGrow: 1, textDecoration: "none", color: "white" }}
+          >
+            <Link
+              to={ROUTES.home}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              {TEXT.planPoker}
             </Link>
           </Typography>
-          {renderButtons()}
+          <Tooltip title="Logout">
+            <IconButton sx={{ color: "white" }} onClick={handleClick}>
+              <LogoutIcon />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
       {token ? (
-        <Drawer
-          variant="permanent"
-          className={clsx(classes.drawer, {
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          })}
-          classes={{
-            paper: clsx({
-              [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open,
-            }),
-          }}
-        >
-          <div className={classes.toolbar}>
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? (
-                <ChevronRightIcon className="white" />
+              {theme.direction === "rtl" ? (
+                <ChevronRightIcon sx={{ color: "white" }} />
               ) : (
-                <ChevronLeftIcon className="white" />
+                <ChevronLeftIcon sx={{ color: "white" }} />
               )}
             </IconButton>
-          </div>
+          </DrawerHeader>
           <Divider />
           <List>
-            {itemsList.map((item) => {
-              const { text, icon, onClick } = item;
+            {drawerItemsList.map(item => {
+              const { text, icon, onClick } = item
               return (
                 <ListItem button key={text} onClick={onClick}>
-                  {icon && <ListItemIcon>{icon}</ListItemIcon>}
-                  <ListItemText primary={text} className="white" />
+                  {icon && (
+                    <ListItemIcon>
+                      <Tooltip title={text}>{icon}</Tooltip>
+                    </ListItemIcon>
+                  )}
+                  <ListItemText primary={text} sx={{ color: "white" }} />
                 </ListItem>
-              );
+              )
             })}
           </List>
         </Drawer>
       ) : (
-        ''
+        ""
       )}
-    </div>
-  );
+    </Box>
+  )
 }
 
-export default Navbar;
+export default Navbar
