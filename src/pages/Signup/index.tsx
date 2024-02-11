@@ -57,8 +57,7 @@ function Signup() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: theme.spacing(5),
-            marginBotton: theme.spacing(5),
+            marginTop: theme.spacing(1),
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

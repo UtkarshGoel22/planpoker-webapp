@@ -188,11 +188,15 @@ function Navbar() {
               {TEXT.planPoker}
             </Link>
           </Typography>
-          <Tooltip title="Logout">
-            <IconButton sx={{ color: "white" }} onClick={handleClick}>
-              <LogoutIcon />
-            </IconButton>
-          </Tooltip>
+          {token ? (
+            <Tooltip title="Logout">
+              <IconButton sx={{ color: "white" }} onClick={handleClick}>
+                <LogoutIcon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            ""
+          )}
         </Toolbar>
       </AppBar>
       {token ? (
