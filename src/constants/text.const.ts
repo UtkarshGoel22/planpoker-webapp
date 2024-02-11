@@ -1,5 +1,6 @@
 export const TEXT = {
   alreadyHaveAnAccout: "Already have an account? Sign in",
+  bearer: "Bearer ",
   createGroup: "Create Group",
   createPokerboard: "Create Pokerboard",
   emailVerificationLinkValidity:

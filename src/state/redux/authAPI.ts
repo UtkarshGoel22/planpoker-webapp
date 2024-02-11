@@ -1,10 +1,32 @@
 import { API } from "@constants/api.const"
+import { TEXT } from "@constants/text.const"
 import { AUTH } from "@constants/webStorage.const"
 import { SigninAPIRequestData } from "@pages/Signin/types"
 import { SignupAPIRequestData } from "@pages/Signup/types"
 import { ReSendVerificationLinkAPIRequestData } from "@pages/UserVerification/types"
 import { makeRequest } from "@utils/api.util"
-import { setItemInLocalStorage } from "@utils/localStorage.utils"
+import {
+  removeItemInLocalStorage,
+  setItemInLocalStorage,
+} from "@utils/localStorage.utils"
+
+export async function logoutUser(
+  token: string | null | undefined,
+  rejectWithValue: (value: unknown) => any,
+) {
+  const response = await makeRequest(
+    {
+      method: API.methods.post,
+      url: `${API.baseUrl}${API.endpoints.userLogout}`,
+      headers: { Authorization: `${TEXT.bearer}${token}` },
+    },
+    rejectWithValue,
+  )
+  if (response.success) {
+    removeItemInLocalStorage(AUTH)
+  }
+  return response
+}
 
 export async function reSendVerificationLink(
   requestData: ReSendVerificationLinkAPIRequestData,
@@ -14,7 +36,7 @@ export async function reSendVerificationLink(
     {
       method: API.methods.post,
       url: `${API.baseUrl}${API.endpoints.userVerify}`,
-      headers: { "Content-Type": API.headers.applicationJson },
+
       data: requestData,
     },
     rejectWithValue,

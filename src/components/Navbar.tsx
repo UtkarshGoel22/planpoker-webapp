@@ -30,6 +30,8 @@ import { ROUTES } from "@constants/routes.const"
 import { TEXT } from "@constants/text.const"
 import Tooltip from "@mui/material/Tooltip"
 
+import { authActions } from "@src/state/redux/authSlice"
+
 const drawerWidth = 240
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -119,7 +121,7 @@ function Navbar() {
   }
 
   function handleClick() {
-    // TODO: dispatch logout action
+    dispatch(authActions.logoutUser(token))
   }
 
   const drawerItemsList = [
@@ -188,11 +190,15 @@ function Navbar() {
               {TEXT.planPoker}
             </Link>
           </Typography>
-          <Tooltip title="Logout">
-            <IconButton sx={{ color: "white" }} onClick={handleClick}>
-              <LogoutIcon />
-            </IconButton>
-          </Tooltip>
+          {token ? (
+            <Tooltip title="Logout">
+              <IconButton sx={{ color: "white" }} onClick={handleClick}>
+                <LogoutIcon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            ""
+          )}
         </Toolbar>
       </AppBar>
       {token ? (

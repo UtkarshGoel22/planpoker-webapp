@@ -5,6 +5,7 @@ import { ReSendVerificationLinkAPIRequestData } from "@pages/UserVerification/ty
 import { AuthErrors } from "@src/types/shared/errors"
 import { User } from "@src/types/shared/user"
 import {
+  logoutUser,
   reSendVerificationLink,
   signinUser,
   signupUser,
@@ -38,10 +39,6 @@ export const authSlice = createAppSlice({
   name: "auth",
   initialState,
   reducers: create => ({
-    logoutUser: create.reducer(state => {
-      state.token = null
-      state.userData = null
-    }),
     reset: create.reducer(state => {
       state.errors = null
       state.loading = false
@@ -50,6 +47,25 @@ export const authSlice = createAppSlice({
       state.userData = null
       state.userVerification = null
     }),
+    logoutUser: create.asyncThunk(
+      async (token: string | null | undefined, { rejectWithValue }) => {
+        return await logoutUser(token, rejectWithValue)
+      },
+      {
+        pending: state => {
+          state.loading = true
+        },
+        fulfilled: state => {
+          state.loading = false
+          state.errors = null
+          state.token = null
+          state.userData = null
+        },
+        rejected: state => {
+          state.loading = false
+        },
+      },
+    ),
     reSendVerificationLink: create.asyncThunk(
       async (
         requestData: ReSendVerificationLinkAPIRequestData,
