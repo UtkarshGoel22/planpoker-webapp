@@ -1,8 +1,8 @@
-import { AuthErrors } from "@src/types/shared/errors"
+import { UserVerificationErrors } from "@src/types/shared/errors"
 
 export interface UserVerificationFormProps {
   initialValues: UserVerificationFormValues
-  errors: AuthErrors | null
+  errors: UserVerificationErrors | null
   loading: boolean
   handleSubmit: (values: UserVerificationFormValues) => void
 }

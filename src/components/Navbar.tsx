@@ -163,7 +163,7 @@ function Navbar() {
       <CssBaseline />
       <AppBar component="nav" position="fixed" open={open}>
         <Toolbar>
-          {token ? (
+          {token && (
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -176,8 +176,6 @@ function Navbar() {
             >
               <MenuIcon />
             </IconButton>
-          ) : (
-            ""
           )}
           <Typography
             variant="h6"
@@ -190,18 +188,16 @@ function Navbar() {
               {TEXT.planPoker}
             </Link>
           </Typography>
-          {token ? (
+          {token && (
             <Tooltip title="Logout">
               <IconButton sx={{ color: "white" }} onClick={handleClick}>
                 <LogoutIcon />
               </IconButton>
             </Tooltip>
-          ) : (
-            ""
           )}
         </Toolbar>
       </AppBar>
-      {token ? (
+      {token && (
         <Drawer variant="permanent" open={open}>
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
@@ -229,8 +225,6 @@ function Navbar() {
             })}
           </List>
         </Drawer>
-      ) : (
-        ""
       )}
     </Box>
   )

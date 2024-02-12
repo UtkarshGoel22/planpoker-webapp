@@ -51,18 +51,19 @@ function UserVerification() {
 
   return (
     <div>
-      {auth.userVerification?.success || auth.errors?.alreadyVerified ? (
+      {(auth.userVerification.success ||
+        auth.userVerification.errors?.alreadyVerified) && (
         <CustomModal
           open={true}
           message={
-            auth.userVerification?.message || auth.errors?.alreadyVerified || ""
+            auth.userVerification?.message ||
+            auth.userVerification.errors?.alreadyVerified ||
+            ""
           }
           handleOnClick={handleClick}
           buttonText={TEXT.signin}
           showButton={true}
         />
-      ) : (
-        ""
       )}
 
       {auth.loading ? (
@@ -75,9 +76,9 @@ function UserVerification() {
       ) : (
         <Container component="main" maxWidth="xs">
           <CssBaseline />
-          {auth.errors?.token ? (
+          {auth.userVerification.errors?.token ? (
             <Alert severity="error" sx={{ m: theme.spacing(5, 0) }}>
-              {auth.errors?.token}
+              {auth.userVerification.errors?.token}
             </Alert>
           ) : (
             <Box
@@ -95,7 +96,7 @@ function UserVerification() {
                 {TEXT.sendEmailVerificationLink}
               </Typography>
               <UserVerificationForm
-                errors={auth.errors}
+                errors={auth.userVerification.errors}
                 handleSubmit={handleSubmit}
                 initialValues={initialValues}
                 loading={auth.loading}

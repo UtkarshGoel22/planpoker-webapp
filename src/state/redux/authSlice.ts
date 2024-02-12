@@ -2,8 +2,11 @@ import { AUTH } from "@constants/webStorage.const"
 import { SigninAPIRequestData } from "@pages/Signin/types"
 import { SignupAPIRequestData } from "@pages/Signup/types"
 import { ReSendVerificationLinkAPIRequestData } from "@pages/UserVerification/types"
-import { AuthErrors } from "@src/types/shared/errors"
-import { User } from "@src/types/shared/user"
+import {
+  LoginErrors,
+  RegistrationErrors,
+  UserVerificationErrors,
+} from "@src/types/shared/errors"
 import {
   logoutUser,
   reSendVerificationLink,
@@ -15,24 +18,35 @@ import { createAppSlice } from "@state/redux/createAppSlice"
 import { getItemInLocalStorage } from "@utils/localStorage.utils"
 
 export interface AuthSliceState {
-  errors: AuthErrors | null
   loading: boolean
-  registration: { success: boolean; message: string } | null
+  login: {
+    errors: LoginErrors | null
+    success: boolean | null
+    message: string | null
+  }
+  registration: {
+    errors: RegistrationErrors | null
+    success: boolean | null
+    message: string | null
+  }
   token: string | undefined | null
-  userData: User | undefined | null
-  userVerification: { success: boolean; message: string } | null
+  // userData: User | undefined | null
+  userVerification: {
+    errors: UserVerificationErrors | null
+    success: boolean | null
+    message: string | null
+  }
 }
 
 const authString = getItemInLocalStorage(AUTH)
 const auth = authString ? JSON.parse(authString) : null
 
 const initialState: AuthSliceState = {
-  errors: null,
   loading: false,
-  registration: null,
+  login: { errors: null, success: null, message: null },
+  registration: { errors: null, success: null, message: null },
   token: auth?.token,
-  userData: auth?.userData,
-  userVerification: null,
+  userVerification: { errors: null, success: null, message: null },
 }
 
 export const authSlice = createAppSlice({
@@ -40,16 +54,19 @@ export const authSlice = createAppSlice({
   initialState,
   reducers: create => ({
     reset: create.reducer(state => {
-      state.errors = null
       state.loading = false
-      state.registration = null
+      state.login = { errors: null, success: null, message: null }
+      state.registration = { errors: null, success: null, message: null }
       state.token = null
-      state.userData = null
-      state.userVerification = null
+      state.userVerification = { errors: null, success: null, message: null }
     }),
     logoutUser: create.asyncThunk(
-      async (token: string | null | undefined, { rejectWithValue }) => {
-        return await logoutUser(token, rejectWithValue)
+      async (
+        token: string | null | undefined,
+        { dispatch, rejectWithValue },
+      ) => {
+        // dispatch action to clear user data
+        return await logoutUser(token, dispatch, rejectWithValue)
       },
       {
         pending: state => {
@@ -57,9 +74,7 @@ export const authSlice = createAppSlice({
         },
         fulfilled: state => {
           state.loading = false
-          state.errors = null
           state.token = null
-          state.userData = null
         },
         rejected: state => {
           state.loading = false
@@ -79,18 +94,22 @@ export const authSlice = createAppSlice({
         },
         fulfilled: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.errors = null
-          state.userVerification = action.payload
+          state.userVerification.errors = null
+          state.userVerification.success = action.payload.success
+          state.userVerification.message = action.payload.message
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.errors = action.payload
+          state.userVerification.errors = action.payload
         },
       },
     ),
     signinUser: create.asyncThunk(
-      async (requestData: SigninAPIRequestData, { rejectWithValue }) => {
-        return await signinUser(requestData, rejectWithValue)
+      async (
+        requestData: SigninAPIRequestData,
+        { dispatch, rejectWithValue },
+      ) => {
+        return await signinUser(requestData, dispatch, rejectWithValue)
       },
       {
         pending: state => {
@@ -98,13 +117,14 @@ export const authSlice = createAppSlice({
         },
         fulfilled: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.errors = null
-          state.token = action.payload.token
-          state.userData = action.payload.userData
+          state.login.errors = null
+          state.login.success = action.payload.success
+          state.login.message = action.payload.message
+          state.token = action.payload.data.token
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.errors = action.payload
+          state.login.errors = action.payload
         },
       },
     ),
@@ -118,12 +138,13 @@ export const authSlice = createAppSlice({
         },
         fulfilled: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.errors = null
-          state.registration = action.payload
+          state.registration.errors = null
+          state.registration.success = action.payload.success
+          state.registration.message = action.payload.message
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.errors = action.payload
+          state.registration.errors = action.payload
         },
       },
     ),
@@ -137,12 +158,13 @@ export const authSlice = createAppSlice({
         },
         fulfilled: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.errors = null
-          state.userVerification = action.payload
+          state.userVerification.errors = null
+          state.userVerification.success = action.payload.success
+          state.userVerification.message = action.payload.message
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.errors = action.payload
+          state.userVerification.errors = action.payload
         },
       },
     ),

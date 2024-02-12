@@ -20,6 +20,7 @@ function Signin() {
   const navigate = useNavigate()
   const theme = useTheme()
   const auth = useAppSelector(state => state.auth)
+  const user = useAppSelector(state => state.user)
 
   const initialValues: SigninFormValues = {
     email: "",
@@ -30,7 +31,7 @@ function Signin() {
     dispatch(authActions.signinUser(values))
   }
 
-  if (auth.token && auth.userData) {
+  if (auth.token && user.userData) {
     navigate(ROUTES.dashboard)
   }
 
@@ -52,7 +53,7 @@ function Signin() {
           {TEXT.signin}
         </Typography>
         <SigninForm
-          errors={auth.errors}
+          errors={auth.login.errors}
           handleSubmit={handleSubmit}
           initialValues={initialValues}
           loading={auth.loading}
