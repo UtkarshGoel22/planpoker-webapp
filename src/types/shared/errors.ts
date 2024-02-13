@@ -1,3 +1,9 @@
+export interface FetchUserErrors {
+  verify?: string
+  auth?: string
+  api?: string
+}
+
 export interface LoginErrors {
   email?: string
   password?: string
@@ -20,5 +26,13 @@ export interface UserVerificationErrors {
   verify?: string
   reVerify?: string
   alreadyVerified?: string
+  api?: string
+}
+
+export interface UpdateUserErrors {
+  firstName?: string
+  lastName?: string
+  username?: string
+  auth?: string
   api?: string
 }

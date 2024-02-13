@@ -1,6 +1,7 @@
 export const API = {
   baseUrl: "http://localhost:5000",
   endpoints: {
+    user: "/user",
     userSignup: "/user/signup",
     userLogin: "/user/login",
     userLogout: "/user/logout",
@@ -11,6 +12,7 @@ export const API = {
   },
   methods: {
     get: "GET",
+    patch: "PATCH",
     post: "POST",
   },
 }

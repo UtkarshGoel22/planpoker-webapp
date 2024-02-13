@@ -6,12 +6,12 @@ import { AUTH } from "@constants/webStorage.const"
 import { SigninAPIRequestData } from "@pages/Signin/types"
 import { SignupAPIRequestData } from "@pages/Signup/types"
 import { ReSendVerificationLinkAPIRequestData } from "@pages/UserVerification/types"
+import { userActions } from "@state/redux/userSlice"
 import { makeRequest } from "@utils/api.util"
 import {
   removeItemInLocalStorage,
   setItemInLocalStorage,
 } from "@utils/localStorage.utils"
-import { userActions } from "./userSlice"
 
 export async function logoutUser(
   token: string | null | undefined,
@@ -41,7 +41,6 @@ export async function reSendVerificationLink(
     {
       method: API.methods.post,
       url: `${API.baseUrl}${API.endpoints.userVerify}`,
-
       data: requestData,
     },
     rejectWithValue,

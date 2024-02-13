@@ -1,14 +1,17 @@
 export const TEXT = {
   alreadyHaveAnAccout: "Already have an account? Sign in",
   bearer: "Bearer ",
+  cardsEstimated: "Cards Estimated",
   createGroup: "Create Group",
   createPokerboard: "Create Pokerboard",
+  email: "Email",
   emailVerificationLinkValidity:
     "Email verification link will be valid till next 6 hours",
   doNotHaveAnAccount: "Do not have an account? Sign up",
   dashboard: "Dashboard",
   groups: "Groups",
   logout: "Logout",
+  name: "Name",
   pageNotFound: "404 Page Not Found",
   planPoker: "Plan Poker",
   profile: "Profile",
@@ -18,4 +21,5 @@ export const TEXT = {
   signin: "Sign In",
   signup: "Sign Up",
   tickets: "Tickets",
+  username: "Username",
 }

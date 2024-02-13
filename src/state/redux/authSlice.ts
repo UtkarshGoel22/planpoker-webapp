@@ -30,7 +30,6 @@ export interface AuthSliceState {
     message: string | null
   }
   token: string | undefined | null
-  // userData: User | undefined | null
   userVerification: {
     errors: UserVerificationErrors | null
     success: boolean | null
@@ -65,7 +64,6 @@ export const authSlice = createAppSlice({
         token: string | null | undefined,
         { dispatch, rejectWithValue },
       ) => {
-        // dispatch action to clear user data
         return await logoutUser(token, dispatch, rejectWithValue)
       },
       {
@@ -101,6 +99,8 @@ export const authSlice = createAppSlice({
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
           state.userVerification.errors = action.payload
+          state.userVerification.success = false
+          state.userVerification.message = null
         },
       },
     ),
@@ -125,6 +125,8 @@ export const authSlice = createAppSlice({
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
           state.login.errors = action.payload
+          state.login.success = false
+          state.login.message = null
         },
       },
     ),
@@ -145,6 +147,8 @@ export const authSlice = createAppSlice({
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
           state.registration.errors = action.payload
+          state.registration.success = false
+          state.registration.message = null
         },
       },
     ),
@@ -165,6 +169,8 @@ export const authSlice = createAppSlice({
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
           state.userVerification.errors = action.payload
+          state.userVerification.success = false
+          state.userVerification.message = null
         },
       },
     ),

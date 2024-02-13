@@ -13,11 +13,12 @@ import "@src/App.css"
 import Navbar from "@components/Navbar"
 import NotFound from "@components/NotFound"
 import OpenRoute from "@components/OpenRoute"
+import PrivateRoute from "@components/PrivateRoute"
 import { ROUTES } from "@constants/routes.const"
+import MyProfile from "@pages/MyProfile/index"
 import Signup from "@pages/Signup/index"
 import Signin from "@pages/Signin/index"
 import UserVerification from "@pages/UserVerification/index"
-import PrivateRoute from "@components/PrivateRoute"
 
 function NavLayout() {
   const theme = useTheme()
@@ -59,6 +60,10 @@ function App() {
           <Route
             path={ROUTES.userVerify}
             element={<OpenRoute component={<UserVerification />} />}
+          />
+          <Route
+            path={ROUTES.myProfile}
+            element={<PrivateRoute component={<MyProfile />} />}
           />
           <Route
             path={ROUTES.dashboard}
