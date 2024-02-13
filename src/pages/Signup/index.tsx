@@ -42,16 +42,14 @@ function Signup() {
 
   return (
     <>
-      {auth.registration?.success ? (
+      {auth.registration.success && (
         <CustomModal
           open={true}
-          message={auth.registration.message}
+          message={auth.registration.message || ""}
           handleOnClick={handleOnClick}
           buttonText={TEXT.signin}
           showButton={true}
         />
-      ) : (
-        ""
       )}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -70,7 +68,7 @@ function Signup() {
             {TEXT.signup}
           </Typography>
           <SignupForm
-            errors={auth.errors}
+            errors={auth.registration.errors}
             handleSubmit={handleSubmit}
             initialValues={initialValues}
             loading={auth.loading}

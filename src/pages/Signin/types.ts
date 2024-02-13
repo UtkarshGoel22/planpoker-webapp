@@ -1,8 +1,8 @@
-import { AuthErrors } from "@src/types/shared/errors"
+import { LoginErrors } from "@src/types/shared/errors"
 
 export interface SigninFormProps {
   initialValues: SigninFormValues
-  errors: AuthErrors | null
+  errors: LoginErrors | null
   loading: boolean
   handleSubmit: (values: SigninFormValues) => void
 }

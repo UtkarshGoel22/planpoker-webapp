@@ -1,6 +1,8 @@
 export const ERROR_MESSAGES = {
+  failedToFetchUserDetails: "Failed to fetch user details",
+  failedToUpdateUserDetails: "Failed to update user details",
   firstNameRequired: "First name is required",
-  firstNameLength: "First name should have ",
+  firstNameLength: "First name should have 1-50 characters",
   lastNameLength: "Last name should have 1-50 characters",
   usernameRequired: "Username is required",
   usernameLength: "Username should have 4-30 characters",
@@ -10,5 +12,6 @@ export const ERROR_MESSAGES = {
   passwordLength: "Password should have 6-50 characters",
   passwordsDoNotMatch: "Passwords do not match",
   confirmPasswordRequired: "Please confirm your password",
+  sessionExpired: "Session expired. Please sign in again.",
   somethingWentWrong: "Something went wrong. Please try again",
 }

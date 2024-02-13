@@ -13,7 +13,7 @@ import { UserVerificationFormProps } from "@pages/UserVerification/types"
 
 function UserVerificationForm({
   initialValues,
-  errors: authErrors,
+  errors: userVerificationErrors,
   loading,
   handleSubmit,
 }: UserVerificationFormProps) {
@@ -39,8 +39,8 @@ function UserVerificationForm({
             setFieldError,
           } = props
 
-          if (authErrors) {
-            setErrors(authErrors)
+          if (userVerificationErrors) {
+            setErrors(userVerificationErrors)
           }
 
           return (
@@ -74,9 +74,9 @@ function UserVerificationForm({
                   </Grid>
                   <div className="container">
                     <h4>
-                      {authErrors?.verify ||
-                        authErrors?.reVerify ||
-                        authErrors?.api}
+                      {userVerificationErrors?.verify ||
+                        userVerificationErrors?.reVerify ||
+                        userVerificationErrors?.api}
                     </h4>
                   </div>
                 </Grid>

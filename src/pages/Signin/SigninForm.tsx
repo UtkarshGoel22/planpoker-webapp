@@ -21,7 +21,7 @@ import { SigninFormProps } from "@pages/Signin/types"
 
 function SigninForm({
   initialValues,
-  errors: authErrors,
+  errors: loginErrors,
   loading,
   handleSubmit,
 }: SigninFormProps) {
@@ -48,8 +48,8 @@ function SigninForm({
             setFieldError,
           } = props
 
-          if (authErrors) {
-            setErrors(authErrors)
+          if (loginErrors) {
+            setErrors(loginErrors)
           }
 
           return (
@@ -115,7 +115,7 @@ function SigninForm({
                     />
                   </Grid>
                   <div className="container">
-                    <h4>{authErrors?.api}</h4>
+                    <h4>{loginErrors?.api}</h4>
                   </div>
                 </Grid>
                 <LoadingButton

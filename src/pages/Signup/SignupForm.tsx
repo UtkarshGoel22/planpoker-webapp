@@ -21,7 +21,7 @@ import { SignupFormProps } from "@pages/Signup/types"
 
 function SignupForm({
   initialValues,
-  errors: authErrors,
+  errors: registrationErrors,
   loading,
   handleSubmit,
 }: SignupFormProps) {
@@ -48,8 +48,8 @@ function SignupForm({
             setFieldError,
           } = props
 
-          if (authErrors) {
-            setErrors(authErrors)
+          if (registrationErrors) {
+            setErrors(registrationErrors)
           }
 
           return (
@@ -196,7 +196,7 @@ function SignupForm({
                     />
                   </Grid>
                   <div className="container">
-                    <h4>{authErrors?.api}</h4>
+                    <h4>{registrationErrors?.api}</h4>
                   </div>
                 </Grid>
                 <LoadingButton
