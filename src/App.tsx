@@ -15,6 +15,7 @@ import NotFound from "@components/NotFound"
 import OpenRoute from "@components/OpenRoute"
 import PrivateRoute from "@components/PrivateRoute"
 import { ROUTES } from "@constants/routes.const"
+import CreateGroup from "@pages/CreateGroup/index"
 import MyProfile from "@pages/MyProfile/index"
 import Signup from "@pages/Signup/index"
 import Signin from "@pages/Signin/index"
@@ -64,6 +65,10 @@ function App() {
           <Route
             path={ROUTES.myProfile}
             element={<PrivateRoute component={<MyProfile />} />}
+          />
+          <Route
+            path={ROUTES.createGroup}
+            element={<PrivateRoute component={<CreateGroup />} />}
           />
           <Route
             path={ROUTES.dashboard}

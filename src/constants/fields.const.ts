@@ -27,4 +27,14 @@ export const FIELDS = {
     label: "Confirm Password",
     name: "confirmPassword",
   },
+  groupName: {
+    constraints: { min: 4, max: 30 },
+    label: "Group Name",
+    name: "groupName",
+  },
+  members: {
+    constraints: { min: 1 },
+    label: "Add Members",
+    name: "members",
+  },
 }

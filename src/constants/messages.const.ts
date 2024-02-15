@@ -1,4 +1,5 @@
 export const ERROR_MESSAGES = {
+  failedToCreateGroup: "Failed to create the group",
   failedToFetchUserDetails: "Failed to fetch user details",
   failedToUpdateUserDetails: "Failed to update user details",
   firstNameRequired: "First name is required",
@@ -12,6 +13,11 @@ export const ERROR_MESSAGES = {
   passwordLength: "Password should have 6-50 characters",
   passwordsDoNotMatch: "Passwords do not match",
   confirmPasswordRequired: "Please confirm your password",
-  sessionExpired: "Session expired. Please sign in again.",
+  sessionExpired: "Session expired. Please sign in again",
   somethingWentWrong: "Something went wrong. Please try again",
+  groupNameRequired: "Group name is required",
+  groupNameLength: "Group name should have 4-30 characters",
+  membersRequired: "Members is a required field",
+  minimumMembersInGroup:
+    "At least 1 member apart from the admin should be selected",
 }

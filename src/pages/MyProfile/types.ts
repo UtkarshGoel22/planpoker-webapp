@@ -13,6 +13,11 @@ export interface EditProfileFormValues {
   username?: string
 }
 
+export interface SearchUserPayloadCreator {
+  searchInput: string
+  handleUnregisteredUsers: boolean
+}
+
 export interface UpdateUserPayloadCreator {
   requestData: EditProfileFormValues
   token: string | undefined | null
