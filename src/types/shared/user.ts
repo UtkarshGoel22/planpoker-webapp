@@ -9,3 +9,10 @@ export interface User {
   createdAt: string
   updatedAt: string
 }
+
+export interface UserSearchOption {
+  name: string
+  id: string
+  email: string
+  username: string
+}

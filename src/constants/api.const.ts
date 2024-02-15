@@ -1,7 +1,12 @@
 export const API = {
   baseUrl: "http://localhost:5000",
+  debounce: {
+    userSearch: 1500,
+  },
   endpoints: {
     user: "/user",
+    users: "/users",
+    userGroup: "/user/group",
     userSignup: "/user/signup",
     userLogin: "/user/login",
     userLogout: "/user/logout",

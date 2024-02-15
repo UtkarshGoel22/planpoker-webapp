@@ -1,3 +1,9 @@
+export interface CreateGroupErrors {
+  groupName?: string
+  members?: string
+  api?: string
+}
+
 export interface FetchUserErrors {
   verify?: string
   auth?: string
@@ -34,5 +40,11 @@ export interface UpdateUserErrors {
   lastName?: string
   username?: string
   auth?: string
+  api?: string
+}
+
+export interface UserSearchErrors {
+  limit?: string
+  searchKey?: string
   api?: string
 }
