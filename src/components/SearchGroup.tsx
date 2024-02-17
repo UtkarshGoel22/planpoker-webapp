@@ -5,31 +5,25 @@ import TextField from "@mui/material/TextField"
 
 import { API } from "@constants/api.const"
 import { FIELDS } from "@constants/fields.const"
+import { groupActions } from "@state/redux/groupSlice"
 import { useAppDispatch, useAppSelector } from "@state/redux/hooks"
-import { userActions } from "@state/redux/userSlice"
 
-interface SearchUserProps {
+interface SearchGroupProps {
   form: any
   error: string | undefined
-  handleUnregisteredUsers: boolean
 }
 
-function SearchUser({ form, error, handleUnregisteredUsers }: SearchUserProps) {
+function SearchGroup({ form, error }: SearchGroupProps) {
   const dispatch = useAppDispatch()
-  const { options } = useAppSelector(state => state.user.searchUser)
+  const { options } = useAppSelector(state => state.group.searchGroup)
   const [searchInput, setSearchInput] = useState("")
 
   useEffect(() => {
     let timeout = setTimeout(() => {
       if (searchInput.length >= 3) {
-        dispatch(
-          userActions.searchUser({
-            searchInput,
-            handleUnregisteredUsers,
-          }),
-        )
+        dispatch(groupActions.searchGroup(searchInput))
       }
-    }, API.debounce.userSearch)
+    }, API.debounce.groupSearch)
     return () => clearTimeout(timeout)
   }, [searchInput])
 
@@ -37,15 +31,13 @@ function SearchUser({ form, error, handleUnregisteredUsers }: SearchUserProps) {
     <>
       <Autocomplete
         options={options}
-        isOptionEqualToValue={(option, value) => option.email === value.email}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
         multiple
         onChange={(_event, value) => {
-          form.setFieldError(FIELDS.members.name, "")
-          form.setFieldValue(FIELDS.members.name, value)
+          form.setFieldError(FIELDS.groups.name, "")
+          form.setFieldValue(FIELDS.groups.name, value)
         }}
-        getOptionLabel={option =>
-          `name: "${option.name}", email: "${option.email}"`
-        }
+        getOptionLabel={option => `name: "${option.name}"`}
         renderInput={params => (
           <TextField
             {...params}
@@ -54,7 +46,7 @@ function SearchUser({ form, error, handleUnregisteredUsers }: SearchUserProps) {
                 setSearchInput(e.target.value)
               }
             }}
-            label={FIELDS.members.label}
+            label={FIELDS.groups.label}
             variant="outlined"
             error={Boolean(error)}
             helperText={error}
@@ -65,4 +57,4 @@ function SearchUser({ form, error, handleUnregisteredUsers }: SearchUserProps) {
   )
 }
 
-export default SearchUser
+export default SearchGroup

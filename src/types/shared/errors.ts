@@ -4,9 +4,23 @@ export interface CreateGroupErrors {
   api?: string
 }
 
+export interface CreatePokerboardErrors {
+  boardName: string
+  members: string
+  groups: string
+  manager?: string
+  api?: string
+}
+
 export interface FetchUserErrors {
   verify?: string
   auth?: string
+  api?: string
+}
+
+export interface GroupSearchErrors {
+  limit?: string
+  searchKey?: string
   api?: string
 }
 

@@ -1,5 +1,9 @@
 export const ERROR_MESSAGES = {
+  boardNameLength: "Board name should have 4-30 characters",
+  boardNameRequired: "Board name is required",
+  deckTypeRequired: "Deck type is required",
   failedToCreateGroup: "Failed to create the group",
+  failedToCreatePokerboard: "Failed to create the pokerboard",
   failedToFetchUserDetails: "Failed to fetch user details",
   failedToUpdateUserDetails: "Failed to update user details",
   firstNameRequired: "First name is required",
@@ -18,6 +22,5 @@ export const ERROR_MESSAGES = {
   groupNameRequired: "Group name is required",
   groupNameLength: "Group name should have 4-30 characters",
   membersRequired: "Members is a required field",
-  minimumMembersInGroup:
-    "At least 1 member apart from the admin should be selected",
+  minimumMembers: "At least 1 member apart from the admin should be selected",
 }

@@ -69,12 +69,13 @@ function CreateGroupForm({
               <Field name={FIELDS.members.name}>
                 {({ form }: any) => (
                   <SearchUser
-                    form={form}
                     error={
                       typeof errors?.members == "string"
                         ? errors.members
                         : undefined
                     }
+                    form={form}
+                    handleUnregisteredUsers={false}
                   />
                 )}
               </Field>
