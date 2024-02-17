@@ -27,6 +27,19 @@ export const FIELDS = {
     label: "Confirm Password",
     name: "confirmPassword",
   },
+  boardName: {
+    constraints: { min: 4, max: 30 },
+    label: "Board Name",
+    name: "boardName",
+  },
+  deckType: {
+    label: "Deck Type",
+    name: "deckType",
+  },
+  groups: {
+    label: "Add Groups",
+    name: "groups",
+  },
   groupName: {
     constraints: { min: 4, max: 30 },
     label: "Group Name",

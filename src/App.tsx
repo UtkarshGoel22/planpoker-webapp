@@ -16,6 +16,7 @@ import OpenRoute from "@components/OpenRoute"
 import PrivateRoute from "@components/PrivateRoute"
 import { ROUTES } from "@constants/routes.const"
 import CreateGroup from "@pages/CreateGroup/index"
+import CreatePokerboard from "@pages/CreatePokerboard/index"
 import MyProfile from "@pages/MyProfile/index"
 import Signup from "@pages/Signup/index"
 import Signin from "@pages/Signin/index"
@@ -69,6 +70,10 @@ function App() {
           <Route
             path={ROUTES.createGroup}
             element={<PrivateRoute component={<CreateGroup />} />}
+          />
+          <Route
+            path={ROUTES.createPokerboard}
+            element={<PrivateRoute component={<CreatePokerboard />} />}
           />
           <Route
             path={ROUTES.dashboard}

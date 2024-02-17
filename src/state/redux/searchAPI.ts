@@ -25,7 +25,7 @@ export async function getUserSearchSuggestions(
     if (handleUnregisteredUsers && data.length === 0) {
       let unregisteredUser: UserSearchOption = {
         email: searchKey,
-        id: "un-registered",
+        id: "unregistered",
         name: "",
         username: "",
       }

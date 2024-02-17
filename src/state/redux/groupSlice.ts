@@ -1,8 +1,9 @@
 import { ERROR_MESSAGES } from "@constants/messages.const"
 import { CreateGroupPayloadCreator } from "@pages/CreateGroup/types"
-import { CreateGroupErrors } from "@src/types/shared/errors"
+import { CreateGroupErrors, GroupSearchErrors } from "@src/types/shared/errors"
+import { GroupSearchOption } from "@src/types/shared/group"
 import { createAppSlice } from "@state/redux/createAppSlice"
-import { createGroup } from "@state/redux/groupAPI"
+import { createGroup, getGroupSearchSuggestions } from "@state/redux/groupAPI"
 
 export interface GroupSliceState {
   loading: boolean
@@ -11,11 +12,16 @@ export interface GroupSliceState {
     success: boolean | null
     message: string | null
   }
+  searchGroup: {
+    errors: GroupSearchErrors | null
+    options: GroupSearchOption[]
+  }
 }
 
 const initialState: GroupSliceState = {
   loading: false,
   createGroup: { errors: null, success: null, message: null },
+  searchGroup: { errors: null, options: [] },
 }
 
 export const groupSlice = createAppSlice({
@@ -51,6 +57,25 @@ export const groupSlice = createAppSlice({
               ? `. ${action.payload.somethingWentWrong || action.payload.api}`
               : ""
           }`
+        },
+      },
+    ),
+    searchGroup: create.asyncThunk(
+      async function (searchInput, { rejectWithValue }) {
+        return await getGroupSearchSuggestions(searchInput, rejectWithValue)
+      },
+      {
+        pending: state => {
+          state.loading = true
+        },
+        fulfilled: (state, action: { [key: string]: any }) => {
+          state.loading = false
+          state.searchGroup.errors = null
+          state.searchGroup.options = action.payload.data
+        },
+        rejected: (state, action: { [key: string]: any }) => {
+          state.loading = false
+          state.searchGroup.errors = action.payload
         },
       },
     ),

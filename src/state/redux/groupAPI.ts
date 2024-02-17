@@ -21,3 +21,16 @@ export async function createGroup(
     rejectWithValue,
   )
 }
+
+export async function getGroupSearchSuggestions(
+  searchKey: string,
+  rejectWithValue: (value: unknown) => any,
+) {
+  return await makeRequest(
+    {
+      method: API.methods.get,
+      url: `${API.baseUrl}${API.endpoints.userGroup}?searchKey=${searchKey}`,
+    },
+    rejectWithValue,
+  )
+}
