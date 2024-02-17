@@ -2,15 +2,14 @@ import { useEffect, useState } from "react"
 
 import EditIcon from "@mui/icons-material/Edit"
 import { useTheme } from "@mui/material/styles"
-import Backdrop from "@mui/material/Backdrop"
 import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import CardHeader from "@mui/material/CardHeader"
-import CircularProgress from "@mui/material/CircularProgress"
 import Fab from "@mui/material/Fab"
 import Grid from "@mui/material/Grid"
 
+import BackDropLoader from "@components/BackDropLoader"
 import CustomModal from "@components/CustomModal"
 import CustomSnackbar from "@components/CustomSnackbar"
 import UserDetail from "@components/UserDetail"
@@ -143,13 +142,7 @@ function MyProfile() {
             </Card>
           </Grid>
         )}
-
-        <Backdrop
-          open={user.loading}
-          sx={{ zIndex: theme.zIndex.drawer + 1, color: "#fff" }}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        <BackDropLoader open={user.loading} />
       </Grid>
     </Box>
   )
