@@ -20,7 +20,7 @@ export const TEXT = {
   planPoker: "Plan Poker",
   profile: "Profile",
   reSendEmail: "Re-Send Email",
-  Pokerboards: "Pokerboards",
+  pokerboards: "Pokerboards",
   sendEmailVerificationLink: "Send Email Verification Link",
   serial: "SERIAL",
   signin: "Sign In",
@@ -28,4 +28,8 @@ export const TEXT = {
   tickets: "Tickets",
   username: "Username",
   viewDetails: "View Details",
+  pleaseCreateAGroup:
+    "You are not a member of any group. " +
+    "Please create a group or ask the admin of the group to send you an invite",
+  goToCreateGroup: "Go to Create Group",
 }

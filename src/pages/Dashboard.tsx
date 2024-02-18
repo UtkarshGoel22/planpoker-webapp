@@ -30,7 +30,7 @@ function Dashboard() {
     <>
       <BackDropLoader open={loading} />
       <Typography align="center" component="h1" variant="h4">
-        {TEXT.Pokerboards}
+        {TEXT.pokerboards}
       </Typography>
       <Grid
         container

@@ -216,7 +216,9 @@ function Navbar() {
                 <ListItem button key={text} onClick={onClick}>
                   {icon && (
                     <ListItemIcon>
-                      <Tooltip title={text}>{icon}</Tooltip>
+                      <Tooltip title={text} placement="right">
+                        {icon}
+                      </Tooltip>
                     </ListItemIcon>
                   )}
                   <ListItemText primary={text} sx={{ color: "white" }} />
