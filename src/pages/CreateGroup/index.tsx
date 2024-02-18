@@ -1,7 +1,6 @@
-import Box from "@mui/material/Box"
+import { useTheme } from "@mui/material/styles"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import CardHeader from "@mui/material/CardHeader"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 
@@ -17,6 +16,7 @@ function CreateGroup() {
   const { token } = useAppSelector(state => state.auth)
   const group = useAppSelector(state => state.group)
   const { userData } = useAppSelector(state => state.user)
+  const theme = useTheme()
 
   const initialValues: CreateGroupFormValues = {
     groupName: "",
@@ -43,17 +43,13 @@ function CreateGroup() {
   }
 
   return (
-    <Box sx={{ maxHeight: "100vh", m: "20px auto" }}>
-      <Grid container spacing={2}>
+    <>
+      <Typography component="h1" variant="h4" align="center">
+        {TEXT.createGroup}
+      </Typography>
+      <Grid container spacing={2} sx={{ mt: theme.spacing(1) }}>
         <Grid item xs={12} md={6} margin="auto">
           <Card>
-            <CardHeader
-              title={
-                <Typography component="h1" variant="h5" align="center">
-                  {TEXT.createGroup}
-                </Typography>
-              }
-            />
             <CardContent>
               <Grid spacing={3} container direction="column">
                 <CreateGroupForm
@@ -83,7 +79,7 @@ function CreateGroup() {
           </Card>
         </Grid>
       </Grid>
-    </Box>
+    </>
   )
 }
 
