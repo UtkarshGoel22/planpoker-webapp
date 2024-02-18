@@ -34,3 +34,19 @@ export async function getGroupSearchSuggestions(
     rejectWithValue,
   )
 }
+
+export async function listGroups(
+  token: string | undefined | null,
+  rejectWithValue: (value: unknown) => any,
+) {
+  return await makeRequest(
+    {
+      method: API.methods.get,
+      url: `${API.baseUrl}${API.endpoints.user}${API.endpoints.groups}`,
+      headers: {
+        Authorization: `${TEXT.bearer}${token}`,
+      },
+    },
+    rejectWithValue,
+  )
+}

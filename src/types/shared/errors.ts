@@ -29,6 +29,11 @@ export interface ListPokerboardsErrors {
   api?: string
 }
 
+export interface ListGroupsErrors {
+  auth?: string
+  api?: string
+}
+
 export interface LoginErrors {
   email?: string
   password?: string

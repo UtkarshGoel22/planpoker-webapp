@@ -2,6 +2,7 @@ export const ERROR_MESSAGES = {
   boardNameLength: "Board name should have 4-30 characters",
   boardNameRequired: "Board name is required",
   deckTypeRequired: "Deck type is required",
+  failedToFetchGroupsList: "Failed to fetch groups list",
   failedToFetchPokerboardsList: "Failed to fetch pokerboards list",
   failedToCreateGroup: "Failed to create the group",
   failedToCreatePokerboard: "Failed to create the pokerboard",

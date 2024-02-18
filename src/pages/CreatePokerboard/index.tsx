@@ -1,7 +1,6 @@
-import Box from "@mui/material/Box"
+import { useTheme } from "@mui/material/styles"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import CardHeader from "@mui/material/CardHeader"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 
@@ -17,6 +16,7 @@ function CreatePokerboard() {
   const pokerboard = useAppSelector(state => state.pokerboard)
   const { userData } = useAppSelector(state => state.user)
   const dispatch = useAppDispatch()
+  const theme = useTheme()
 
   const initialValues: CreatePokerboardFormValues = {
     boardName: "",
@@ -45,17 +45,13 @@ function CreatePokerboard() {
   }
 
   return (
-    <Box sx={{ maxHeight: "100vh", m: "20px auto" }}>
-      <Grid container spacing={2}>
+    <>
+      <Typography component="h1" variant="h4" align="center">
+        {TEXT.createPokerboard}
+      </Typography>
+      <Grid container spacing={2} sx={{ mt: theme.spacing(1) }}>
         <Grid item xs={12} md={6} margin="auto">
           <Card>
-            <CardHeader
-              title={
-                <Typography component="h1" variant="h5" align="center">
-                  {TEXT.createPokerboard}
-                </Typography>
-              }
-            />
             <CardContent>
               <Grid spacing={3} container direction="column">
                 <CreatePokerboardForm
@@ -85,7 +81,7 @@ function CreatePokerboard() {
           </Card>
         </Grid>
       </Grid>
-    </Box>
+    </>
   )
 }
 

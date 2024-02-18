@@ -8,17 +8,17 @@ import Typography from "@mui/material/Typography"
 import BackDropLoader from "@components/BackDropLoader"
 import CustomModal from "@components/CustomModal"
 import CustomSnackbar from "@components/CustomSnackbar"
-import PokerboardDetails from "@components/PokerboardDetails"
+import GroupDetails from "@components/GroupDetails"
 import { ROUTES } from "@constants/routes.const"
 import { TEXT } from "@constants/text.const"
+import { groupActions } from "@state/redux/groupSlice"
 import { useAppDispatch, useAppSelector } from "@state/redux/hooks"
-import { pokerboardActions } from "@state/redux/pokerboardSlice"
 
-function Dashboard() {
+function ListGroups() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { token } = useAppSelector(state => state.auth)
-  const { listPokerboards, loading } = useAppSelector(state => state.pokerboard)
+  const { listGroups, loading } = useAppSelector(state => state.group)
   const [showSnackbar, setShowSnackbar] = useState(true)
   const theme = useTheme()
 
@@ -27,24 +27,24 @@ function Dashboard() {
   }
 
   useEffect(() => {
-    dispatch(pokerboardActions.listPokerboards(token))
+    dispatch(groupActions.listGroups(token))
   }, [])
 
   return (
     <>
       <BackDropLoader open={loading} />
-      {listPokerboards.data?.length == 0 ? (
+      {listGroups.data?.length == 0 ? (
         <CustomModal
-          open={listPokerboards.data?.length == 0}
-          message={TEXT.pleaseCreateAPokerboard}
-          handleOnClick={() => navigate(ROUTES.createPokerboard)}
-          buttonText={TEXT.goToCreatePokerboard}
+          open={listGroups.data?.length == 0}
+          message={TEXT.pleaseCreateAGroup}
+          handleOnClick={() => navigate(ROUTES.createGroup)}
+          buttonText={TEXT.goToCreateGroup}
           showButton={true}
         />
       ) : (
         <>
           <Typography align="center" component="h1" variant="h4">
-            {TEXT.pokerboards}
+            {TEXT.groups}
           </Typography>
           <Grid
             container
@@ -52,21 +52,21 @@ function Dashboard() {
             justifyContent="center"
             sx={{ mt: theme.spacing(1) }}
           >
-            {listPokerboards.data?.map(pokerboard => (
-              <PokerboardDetails key={pokerboard.id} data={pokerboard} />
+            {listGroups.data?.map(group => (
+              <GroupDetails key={group.id} data={group} />
             ))}
-            {showSnackbar && listPokerboards.success && (
+            {showSnackbar && listGroups.success && (
               <CustomSnackbar
-                open={listPokerboards.success}
-                message={listPokerboards.message}
+                open={listGroups.success}
+                message={listGroups.message}
                 severity="success"
                 handleClose={handleClose}
               />
             )}
-            {showSnackbar && listPokerboards.success === false && (
+            {showSnackbar && listGroups.success === false && (
               <CustomSnackbar
-                open={listPokerboards.success === false}
-                message={listPokerboards.message}
+                open={listGroups.success === false}
+                message={listGroups.message}
                 severity="error"
                 handleClose={handleClose}
               />
@@ -78,4 +78,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default ListGroups
