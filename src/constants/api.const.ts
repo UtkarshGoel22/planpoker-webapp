@@ -5,6 +5,7 @@ export const API = {
     groupSearch: 1500,
   },
   endpoints: {
+    groups: "/groups",
     pokerboard: "/pokerboard",
     pokerboards: "/pokerboards",
     user: "/user",

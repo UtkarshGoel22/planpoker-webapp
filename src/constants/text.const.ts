@@ -20,7 +20,7 @@ export const TEXT = {
   planPoker: "Plan Poker",
   profile: "Profile",
   reSendEmail: "Re-Send Email",
-  savedPokerboards: "Saved Pokerboards",
+  Pokerboards: "Pokerboards",
   sendEmailVerificationLink: "Send Email Verification Link",
   serial: "SERIAL",
   signin: "Sign In",

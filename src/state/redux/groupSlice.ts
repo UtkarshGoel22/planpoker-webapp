@@ -1,9 +1,17 @@
 import { ERROR_MESSAGES } from "@constants/messages.const"
 import { CreateGroupPayloadCreator } from "@pages/CreateGroup/types"
-import { CreateGroupErrors, GroupSearchErrors } from "@src/types/shared/errors"
-import { GroupSearchOption } from "@src/types/shared/group"
+import {
+  CreateGroupErrors,
+  GroupSearchErrors,
+  ListGroupsErrors,
+} from "@src/types/shared/errors"
+import { GroupData, GroupSearchOption } from "@src/types/shared/group"
 import { createAppSlice } from "@state/redux/createAppSlice"
-import { createGroup, getGroupSearchSuggestions } from "@state/redux/groupAPI"
+import {
+  createGroup,
+  getGroupSearchSuggestions,
+  listGroups,
+} from "@state/redux/groupAPI"
 
 export interface GroupSliceState {
   loading: boolean
@@ -11,6 +19,12 @@ export interface GroupSliceState {
     errors: CreateGroupErrors | null
     success: boolean | null
     message: string | null
+  }
+  listGroups: {
+    errors: ListGroupsErrors | null
+    success: boolean | null
+    message: string | null
+    data: GroupData[] | null
   }
   searchGroup: {
     errors: GroupSearchErrors | null
@@ -21,6 +35,7 @@ export interface GroupSliceState {
 const initialState: GroupSliceState = {
   loading: false,
   createGroup: { errors: null, success: null, message: null },
+  listGroups: { errors: null, success: null, message: null, data: null },
   searchGroup: { errors: null, options: [] },
 }
 
@@ -57,6 +72,29 @@ export const groupSlice = createAppSlice({
               ? `. ${action.payload.somethingWentWrong || action.payload.api}`
               : ""
           }`
+        },
+      },
+    ),
+    listGroups: create.asyncThunk(
+      async function (token: string | undefined | null, { rejectWithValue }) {
+        return await listGroups(token, rejectWithValue)
+      },
+      {
+        pending: state => {
+          state.loading = true
+        },
+        fulfilled: (state, action: { [key: string]: any }) => {
+          state.loading = false
+          state.listGroups.errors = null
+          state.listGroups.success = action.payload.success
+          state.listGroups.message = action.payload.message
+          state.listGroups.data = action.payload.data.groups
+        },
+        rejected: (state, action: { [key: string]: any }) => {
+          state.loading = false
+          state.listGroups.errors = action.payload
+          state.listGroups.success = false
+          state.listGroups.message = `${ERROR_MESSAGES.failedToFetchGroupsList}${action.payload.api ? `. ${action.payload.api}` : ""}`
         },
       },
     ),
