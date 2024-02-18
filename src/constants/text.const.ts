@@ -31,5 +31,9 @@ export const TEXT = {
   pleaseCreateAGroup:
     "You are not a member of any group. " +
     "Please create a group or ask the admin of the group to send you an invite",
+  pleaseCreateAPokerboard:
+    "You are not a part of any pokerboard. " +
+    "Please create a pokerboard or ask the manager of the pokerboard to send you an invite",
   goToCreateGroup: "Go to Create Group",
+  goToCreatePokerboard: "Go to Create Pokerboard",
 }
