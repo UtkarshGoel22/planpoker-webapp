@@ -10,4 +10,5 @@ export const ROUTES = {
   groups: "/groups",
   tickets: "/tickets",
   createGroup: "/create-group",
+  pokerboard: "/pokerboard",
 }

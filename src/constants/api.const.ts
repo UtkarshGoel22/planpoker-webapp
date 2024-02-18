@@ -6,6 +6,7 @@ export const API = {
   },
   endpoints: {
     pokerboard: "/pokerboard",
+    pokerboards: "/pokerboards",
     user: "/user",
     users: "/users",
     userGroup: "/user/group",

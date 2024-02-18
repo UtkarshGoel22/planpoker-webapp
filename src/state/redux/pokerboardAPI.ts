@@ -21,3 +21,19 @@ export async function createPokerboard(
     rejectWithValue,
   )
 }
+
+export async function listPokerboards(
+  token: string | undefined | null,
+  rejectWithValue: (value: unknown) => any,
+) {
+  return await makeRequest(
+    {
+      method: API.methods.get,
+      url: `${API.baseUrl}${API.endpoints.user}${API.endpoints.pokerboards}`,
+      headers: {
+        Authorization: `${TEXT.bearer}${token}`,
+      },
+    },
+    rejectWithValue,
+  )
+}
