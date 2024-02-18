@@ -17,6 +17,7 @@ import PrivateRoute from "@components/PrivateRoute"
 import { ROUTES } from "@constants/routes.const"
 import CreateGroup from "@pages/CreateGroup/index"
 import CreatePokerboard from "@pages/CreatePokerboard/index"
+import Dashboard from "@pages/Dashboard"
 import MyProfile from "@pages/MyProfile/index"
 import Signup from "@pages/Signup/index"
 import Signin from "@pages/Signin/index"
@@ -77,7 +78,7 @@ function App() {
           />
           <Route
             path={ROUTES.dashboard}
-            element={<PrivateRoute component={<>Dashboard</>} />}
+            element={<PrivateRoute component={<Dashboard />} />}
           />
           <Route path="*" element={<Navigate to={ROUTES.notFound} replace />} />
         </Route>

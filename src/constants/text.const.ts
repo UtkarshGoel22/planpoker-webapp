@@ -27,4 +27,5 @@ export const TEXT = {
   signup: "Sign Up",
   tickets: "Tickets",
   username: "Username",
+  viewDetails: "View Details",
 }

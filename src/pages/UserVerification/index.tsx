@@ -5,13 +5,12 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined"
 import { useTheme } from "@mui/material/styles"
 import Alert from "@mui/material/Alert"
 import Avatar from "@mui/material/Avatar"
-import Backdrop from "@mui/material/Backdrop"
 import Box from "@mui/material/Box"
-import CircularProgress from "@mui/material/CircularProgress"
 import Container from "@mui/material/Container"
 import CssBaseline from "@mui/material/CssBaseline"
 import Typography from "@mui/material/Typography"
 
+import BackDropLoader from "@components/BackDropLoader"
 import CustomModal from "@components/CustomModal"
 import { ROUTES } from "@constants/routes.const"
 import { TEXT } from "@constants/text.const"
@@ -67,12 +66,7 @@ function UserVerification() {
       )}
 
       {auth.loading ? (
-        <Backdrop
-          sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }}
-          open={auth.loading}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        <BackDropLoader open={auth.loading} />
       ) : (
         <Container component="main" maxWidth="xs">
           <CssBaseline />

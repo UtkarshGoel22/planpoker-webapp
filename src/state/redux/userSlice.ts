@@ -36,11 +36,20 @@ export interface UserSliceState {
   }
 }
 
+function getUser(): User | null {
+  const authString = getItemInLocalStorage(AUTH)
+  const auth = authString ? JSON.parse(authString) : null
+  if (auth && auth.userData) {
+    return auth.userData
+  }
+  return null
+}
+
 const initialState: UserSliceState = {
   fetchUser: { errors: null, success: null, message: null },
   loading: false,
   searchUser: { errors: null, options: [] },
-  userData: JSON.parse(getItemInLocalStorage(AUTH) || "")?.userData,
+  userData: getUser(),
   updateUser: { errors: null, success: null, message: null },
 }
 
