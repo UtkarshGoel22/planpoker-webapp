@@ -3,10 +3,12 @@ export const ERROR_MESSAGES = {
   boardNameRequired: "Board name is required",
   deckTypeRequired: "Deck type is required",
   failedToFetchGroupsList: "Failed to fetch groups list",
+  failedToFetchPokerboard: "Failed to fetch pokerboard",
   failedToFetchPokerboardsList: "Failed to fetch pokerboards list",
   failedToCreateGroup: "Failed to create the group",
   failedToCreatePokerboard: "Failed to create the pokerboard",
   failedToFetchUserDetails: "Failed to fetch user details",
+  failedToImportTickets: "Failed to import tickets",
   failedToUpdateUserDetails: "Failed to update user details",
   firstNameRequired: "First name is required",
   firstNameLength: "First name should have 1-50 characters",
@@ -25,4 +27,5 @@ export const ERROR_MESSAGES = {
   groupNameLength: "Group name should have 4-30 characters",
   membersRequired: "Members is a required field",
   minimumMembers: "At least 1 member apart from the admin should be selected",
+  required: "Required",
 }

@@ -5,6 +5,7 @@ import { setupListeners } from "@reduxjs/toolkit/query"
 import { authSlice } from "@state/redux/authSlice"
 import { groupSlice } from "@state/redux/groupSlice"
 import { pokerboardSlice } from "@state/redux/pokerboardSlice"
+import { ticketSlice } from "@state/redux/ticketSlice"
 import { userSlice } from "@state/redux/userSlice"
 
 // `combineSlices` automatically combines the reducers using
@@ -13,6 +14,7 @@ const rootReducer = combineSlices(
   authSlice,
   groupSlice,
   pokerboardSlice,
+  ticketSlice,
   userSlice,
 )
 // Infer the `RootState` type from the root reducer

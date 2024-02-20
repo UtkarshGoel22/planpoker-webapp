@@ -1,3 +1,5 @@
+import { UserRoles } from "@enums/user.enum"
+
 export interface User {
   id: string
   firstName: string
@@ -16,3 +18,8 @@ export interface UserSearchOption {
   email: string
   username: string
 }
+
+export type UserRoleType =
+  | UserRoles.MANAGER
+  | UserRoles.PLAYER
+  | UserRoles.SPECTATOR

@@ -36,4 +36,13 @@ export const TEXT = {
     "Please create a pokerboard or ask the manager of the pokerboard to send you an invite",
   goToCreateGroup: "Go to Create Group",
   goToCreatePokerboard: "Go to Create Pokerboard",
+  goToHome: "Go to Home",
+  goToPokerboard: "Board",
+  import: "Import",
+  save: "Save",
+  select: "Select",
+  remove: "Remove",
+  next: "Next",
+  prev: "Prev",
+  accessDenied: "Access Denied",
 }

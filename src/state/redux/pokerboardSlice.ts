@@ -2,11 +2,19 @@ import { ERROR_MESSAGES } from "@constants/messages.const"
 import { CreatePokerboardPayloadCreator } from "@pages/CreatePokerboard/types"
 import {
   CreatePokerboardErrors,
+  FetchPokerboardErrors,
   ListPokerboardsErrors,
 } from "@src/types/shared/errors"
-import { PokerboardData } from "@src/types/shared/pokerboard"
+import {
+  PokerboardCardData,
+  PokerboardData,
+} from "@src/types/shared/pokerboard"
 import { createAppSlice } from "@state/redux/createAppSlice"
-import { createPokerboard, listPokerboards } from "@state/redux/pokerboardAPI"
+import {
+  createPokerboard,
+  fetchPokerboard,
+  listPokerboards,
+} from "@state/redux/pokerboardAPI"
 
 export interface PokerboardSliceState {
   loading: boolean
@@ -15,17 +23,24 @@ export interface PokerboardSliceState {
     success: boolean | null
     message: string | null
   }
+  fetchPokerboard: {
+    errors: FetchPokerboardErrors | null
+    success: boolean | null
+    message: string | null
+    data: PokerboardData | null
+  }
   listPokerboards: {
     errors: ListPokerboardsErrors | null
     success: boolean | null
     message: string | null
-    data: PokerboardData[] | null
+    data: PokerboardCardData[] | null
   }
 }
 
 const initialState: PokerboardSliceState = {
   loading: false,
   createPokerboard: { errors: null, success: null, message: null },
+  fetchPokerboard: { errors: null, success: null, message: null, data: null },
   listPokerboards: { errors: null, success: null, message: null, data: null },
 }
 
@@ -55,13 +70,42 @@ export const pokerboardSlice = createAppSlice({
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.createPokerboard.errors = action.payload
+          state.createPokerboard.errors = action.payload.data
           state.createPokerboard.success = false
           state.createPokerboard.message = `${ERROR_MESSAGES.failedToCreatePokerboard}${
-            action.payload.somethingWentWrong || action.payload.api
-              ? `. ${action.payload.somethingWentWrong || action.payload.api}`
+            action.payload.data.somethingWentWrong || action.payload.data.api
+              ? `. ${action.payload.data.somethingWentWrong || action.payload.data.api}`
               : ""
           }`
+        },
+      },
+    ),
+    fetchPokerboard: create.asyncThunk(
+      async function (
+        {
+          token,
+          id,
+        }: { token: string | undefined | null; id: string | undefined },
+        { rejectWithValue },
+      ) {
+        return await fetchPokerboard(token, id, rejectWithValue)
+      },
+      {
+        pending: state => {
+          state.loading = true
+        },
+        fulfilled: (state, action: { [key: string]: any }) => {
+          state.loading = false
+          state.fetchPokerboard.errors = null
+          state.fetchPokerboard.success = action.payload.success
+          state.fetchPokerboard.message = action.payload.message
+          state.fetchPokerboard.data = action.payload.data
+        },
+        rejected: (state, action: { [key: string]: any }) => {
+          state.loading = false
+          state.fetchPokerboard.errors = action.payload.data
+          state.fetchPokerboard.success = false
+          state.fetchPokerboard.message = `${ERROR_MESSAGES.failedToFetchPokerboard}${action.payload.data.id || action.payload.data.api ? `. ${action.payload.data.id || action.data.payload.api}` : ""}`
         },
       },
     ),
@@ -82,9 +126,9 @@ export const pokerboardSlice = createAppSlice({
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.listPokerboards.errors = action.payload
+          state.listPokerboards.errors = action.payload.data
           state.listPokerboards.success = false
-          state.listPokerboards.message = `${ERROR_MESSAGES.failedToFetchPokerboardsList}${action.payload.api ? `. ${action.payload.api}` : ""}`
+          state.listPokerboards.message = `${ERROR_MESSAGES.failedToFetchPokerboardsList}${action.payload.data.api ? `. ${action.payload.data.api}` : ""}`
         },
       },
     ),

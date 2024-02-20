@@ -65,11 +65,11 @@ export const groupSlice = createAppSlice({
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.createGroup.errors = action.payload
+          state.createGroup.errors = action.payload.data
           state.createGroup.success = false
           state.createGroup.message = `${ERROR_MESSAGES.failedToCreateGroup}${
-            action.payload.somethingWentWrong || action.payload.api
-              ? `. ${action.payload.somethingWentWrong || action.payload.api}`
+            action.payload.data.somethingWentWrong || action.payload.data.api
+              ? `. ${action.payload.data.somethingWentWrong || action.payload.data.api}`
               : ""
           }`
         },
@@ -92,9 +92,9 @@ export const groupSlice = createAppSlice({
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.listGroups.errors = action.payload
+          state.listGroups.errors = action.payload.data
           state.listGroups.success = false
-          state.listGroups.message = `${ERROR_MESSAGES.failedToFetchGroupsList}${action.payload.api ? `. ${action.payload.api}` : ""}`
+          state.listGroups.message = `${ERROR_MESSAGES.failedToFetchGroupsList}${action.payload.data.api ? `. ${action.payload.data.api}` : ""}`
         },
       },
     ),
@@ -113,7 +113,7 @@ export const groupSlice = createAppSlice({
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.searchGroup.errors = action.payload
+          state.searchGroup.errors = action.payload.data
         },
       },
     ),

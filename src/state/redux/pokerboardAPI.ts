@@ -22,6 +22,23 @@ export async function createPokerboard(
   )
 }
 
+export async function fetchPokerboard(
+  token: string | undefined | null,
+  id: string | undefined,
+  rejectWithValue: (value: unknown) => any,
+) {
+  return await makeRequest(
+    {
+      method: API.methods.get,
+      url: `${API.baseUrl}${API.endpoints.pokerboard}/${id}`,
+      headers: {
+        Authorization: `${TEXT.bearer}${token}`,
+      },
+    },
+    rejectWithValue,
+  )
+}
+
 export async function listPokerboards(
   token: string | undefined | null,
   rejectWithValue: (value: unknown) => any,
