@@ -6,8 +6,10 @@ export const API = {
   },
   endpoints: {
     groups: "/groups",
+    importTickets: "/pokerboard/import-tickets",
     pokerboard: "/pokerboard",
     pokerboards: "/pokerboards",
+    tickets: "/tickets",
     user: "/user",
     users: "/users",
     userGroup: "/user/group",
@@ -24,4 +26,5 @@ export const API = {
     patch: "PATCH",
     post: "POST",
   },
+  paginationLimit: 5,
 }

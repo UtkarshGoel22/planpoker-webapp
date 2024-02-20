@@ -1,3 +1,9 @@
+export interface AddTicketsToPokerboardErrors {
+  auth?: string
+  id?: string
+  permission?: string
+}
+
 export interface CreateGroupErrors {
   groupName?: string
   members?: string
@@ -12,6 +18,12 @@ export interface CreatePokerboardErrors {
   api?: string
 }
 
+export interface FetchPokerboardErrors {
+  id?: string
+  auth?: string
+  api?: string
+}
+
 export interface FetchUserErrors {
   verify?: string
   auth?: string
@@ -21,6 +33,11 @@ export interface FetchUserErrors {
 export interface GroupSearchErrors {
   limit?: string
   searchKey?: string
+  api?: string
+}
+
+export interface ImportTicketErrors {
+  auth?: string
   api?: string
 }
 

@@ -1,51 +1,21 @@
-import {
-  BrowserRouter,
-  Navigate,
-  Outlet,
-  Route,
-  Routes,
-} from "react-router-dom"
-
-import { useTheme } from "@mui/material/styles"
-import Box from "@mui/material/Box"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
 import "@src/App.css"
-import Navbar from "@components/Navbar"
 import NotFound from "@components/NotFound"
 import OpenRoute from "@components/OpenRoute"
 import PrivateRoute from "@components/PrivateRoute"
 import { ROUTES } from "@constants/routes.const"
+import NavLayout from "@layouts/NavLayout"
+import PokerboardLayout from "@layouts/PokerboardLayout"
 import CreateGroup from "@pages/CreateGroup/index"
 import CreatePokerboard from "@pages/CreatePokerboard/index"
 import Dashboard from "@pages/Dashboard"
+import ImportTickets from "@pages/ImportTickets/index"
 import ListGroups from "@pages/ListGroups"
 import MyProfile from "@pages/MyProfile/index"
 import Signup from "@pages/Signup/index"
 import Signin from "@pages/Signin/index"
 import UserVerification from "@pages/UserVerification/index"
-
-function NavLayout() {
-  const theme = useTheme()
-
-  return (
-    <Box component="div" sx={{ display: "flex", flexGrow: 1 }}>
-      <Navbar />
-      <Box component="main" sx={{ flexGrow: 1, p: theme.spacing(3) }}>
-        <Box
-          component="div"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            p: theme.spacing(0, 1),
-            ...theme.mixins.toolbar,
-          }}
-        />
-        <Outlet />
-      </Box>
-    </Box>
-  )
-}
 
 function App() {
   return (
@@ -85,6 +55,16 @@ function App() {
             path={ROUTES.groups}
             element={<PrivateRoute component={<ListGroups />} />}
           />
+          <Route path={ROUTES.pokerboardDetail} element={<PokerboardLayout />}>
+            <Route
+              index
+              element={<PrivateRoute component={<>PokerboardData</>} />}
+            />
+            <Route
+              path={ROUTES.importTickets}
+              element={<PrivateRoute component={<ImportTickets />} />}
+            />
+          </Route>
           <Route path="*" element={<Navigate to={ROUTES.notFound} replace />} />
         </Route>
         <Route path={ROUTES.notFound} element={<NotFound />} />

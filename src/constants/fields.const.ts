@@ -50,4 +50,12 @@ export const FIELDS = {
     label: "Add Members",
     name: "members",
   },
+  ticketsInput: {
+    label: "Import Tickets",
+    name: "ticketsInput",
+  },
+  importBy: {
+    label: "Import By",
+    name: "importBy",
+  },
 }

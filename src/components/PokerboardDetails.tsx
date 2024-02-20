@@ -6,12 +6,12 @@ import CustomCard from "@components/CustomCard"
 import Typography from "@mui/material/Typography"
 
 import { TEXT } from "@constants/text.const"
-import { PokerboardData } from "@src/types/shared/pokerboard"
+import { PokerboardCardData } from "@src/types/shared/pokerboard"
 import { ROUTES } from "@constants/routes.const"
 
 interface PokerboardDetailsProps {
   key: string
-  data: PokerboardData
+  data: PokerboardCardData
 }
 
 function PokerboardDetails({ data }: PokerboardDetailsProps) {
