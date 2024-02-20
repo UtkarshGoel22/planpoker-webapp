@@ -80,10 +80,10 @@ export const userSlice = createAppSlice({
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.fetchUser.errors = action.payload
+          state.fetchUser.errors = action.payload.data
           state.fetchUser.success = false
           state.fetchUser.message = ERROR_MESSAGES.failedToFetchUserDetails
-          state.userData = action.payload.data
+          state.userData = action.payload.data.data
         },
       },
     ),
@@ -110,7 +110,7 @@ export const userSlice = createAppSlice({
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.searchUser.errors = action.payload
+          state.searchUser.errors = action.payload.data
         },
       },
     ),
@@ -139,7 +139,7 @@ export const userSlice = createAppSlice({
         },
         rejected: (state, action: { [key: string]: any }) => {
           state.loading = false
-          state.updateUser.errors = action.payload
+          state.updateUser.errors = action.payload.data
           state.updateUser.success = false
           state.updateUser.message = ERROR_MESSAGES.failedToUpdateUserDetails
         },

@@ -11,9 +11,11 @@ export async function makeRequest(
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      return rejectWithValue(error.response.data.data)
+      return rejectWithValue(error.response.data)
     } else {
-      return rejectWithValue({ api: ERROR_MESSAGES.somethingWentWrong })
+      return rejectWithValue({
+        data: { api: ERROR_MESSAGES.somethingWentWrong },
+      })
     }
   }
 }
